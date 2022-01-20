@@ -1,7 +1,11 @@
 job [[ template "job_name" . ]] {
   [[ template "region" . ]]
   datacenters = [[ .hello_world.datacenters | toPrettyJson ]]
-  type = "service"
+  type = "sysbatch"
+
+  periodic {
+    cron = "@daily"
+  }
 
   group "app" {
     count = [[ .hello_world.count ]]
@@ -11,22 +15,6 @@ job [[ template "job_name" . ]] {
         to = 8000
       }
     }
-
-    [[ if .hello_world.register_consul_service ]]
-    service {
-      name = "[[ .hello_world.consul_service_name ]]"
-      tags = [[ .hello_world.consul_service_tags | toPrettyJson ]]
-      port = "http"
-
-      check {
-        name     = "alive"
-        type     = "http"
-        path     = "/"
-        interval = "10s"
-        timeout  = "2s"
-      }
-    }
-    [[ end ]]
 
     restart {
       attempts = 2
