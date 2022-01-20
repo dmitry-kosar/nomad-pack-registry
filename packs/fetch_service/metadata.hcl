@@ -4,7 +4,7 @@ app {
 }
 
 pack {
-  name = "fetch_service"
+  name = "hello_world"
   description = "This deploys a simple applicaton as a service with an optional associated consul service."
   url = "https://github.com/hashicorp/nomad-pack-community-registry/hello_world"
   version = "0.0.1"

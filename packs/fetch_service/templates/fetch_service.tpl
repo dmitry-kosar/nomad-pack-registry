@@ -1,5 +1,5 @@
 job [[ template "job_name" . ]] {
-  type = "sbatch"
+  type = "sysbatch"
 
   group "app" {
     count = 1
